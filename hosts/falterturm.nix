@@ -24,7 +24,7 @@ in
 
   boot.loader.grub.enable = true;
   boot.loader.grub.version = 2;
-  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.device = "/dev/vda";
 
   freifunk.gateway = {
     enable = true;
@@ -63,12 +63,12 @@ in
           mesh0 = {
             inherit secret listenAddresses;
             listenPort = 10000;
-            mtu = 1426;
+            mtu = 1280;
           };
           mesh1 = {
             inherit secret listenAddresses;
             listenPort = 10001;
-            mtu = 1426;
+            mtu = 1280;
           };
           mesh2 = {
             inherit secret listenAddresses;
@@ -82,8 +82,10 @@ in
           };
         };
         portBalancings = [
-          { from = 10000; to = 10001 }
+          { from = 10000; to = 10001; }
+          { from = 10001; to = 10002; }
           { from = 10002; to = 10003; }
+          { from = 10003; to = 10000; }
         ];
       };
       #weiteres Segment...
