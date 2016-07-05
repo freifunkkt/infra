@@ -1,24 +1,24 @@
 {
-  network.description = "ffmuc network";
+  network.description = "ffkt network";
 
-  isartor = { config, pkgs, ... }:
+  falterturm = { config, pkgs, ... }:
     {
       deployment = {
         targetEnv = "none";
-        targetHost = "isartor.ffmuc.net";
+        targetHost = "gw01.freifunk-kitzingen.de";
       };
 
-      require = [ ./hosts/isartor.nix ];
+      require = [ ./hosts/falterturm.nix ];
     };
 
-  stachus = { ... }:
-    {
-      deployment = {
-        targetEnv = "none";
-        targetHost = "195.30.94.61";
-      };
+  #stachus = { ... }:
+  #  {
+  #    deployment = {
+  #      targetEnv = "none";
+  #      targetHost = "195.30.94.61";
+  #    };
 
-      require = [ ./hosts/stachus.nix ];
-    };
+  #    require = [ ./hosts/stachus.nix ];
+  #  };
 }
 
