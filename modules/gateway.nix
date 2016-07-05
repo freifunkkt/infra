@@ -229,6 +229,15 @@ in
           allowedTCPPorts = [ 5201 69 ];
           allowedUDPPorts = [ 69 ];
           checkReversePath = false;
+          # ports direkt raus:
+          # im folgenden habe ich die Ports für udp entfernt: 655 (unbekannt) 1149 (unbekannt)
+          # folgende Ports sind noch drin: 
+          # udp: 53 -> DNS, 123 -> NTP, 4500 -> ipsec, 1293 -> IPsec, 500 -> IPsec, 5060 -> Voice over IP, 5061 -> encrypted VOIP, 4569 -> Asterisk, 3478 -> Voip/PS3
+          # im folgenden habe ich die Ports für tcp entfernt: 655 (unbekannt) 1149 (unbekannt)
+          # tcp: 80-> http, 443-> https, 143 -> imap, 993 -> imaps, 110 -> POP3, 587 -> SMTP, 5222, 5269 XMPP(Jabber),
+          #      123 -> NTP, 4500 -> ipsec, 1293 -> IPsec, 500 -> IPsec, 5060 -> Voice over IP, 5061 -> encrypted VOIP,
+          #      4569 -> Asterisk, 3478 -> Voip/PS3
+          
           extraCommands = ''
             ${concatSegments (name: scfg: ''
               iptables -I nixos-fw 3 -i br-${name} -p udp --dport 67:68 --sport 67:68 -j nixos-fw-accept
@@ -237,11 +246,11 @@ in
 
               ${concatMapStrings (port: ''
                 iptables -A PREROUTING -t mangle -i br-${name} -p udp --dport ${toString port} -j MARK --set-mark 5
-              '') [ 53 655 1149 123 4500 1293 500 5060 5061 4569 3478 ]}
+              '') [ 53 123 4500 1293 500 5060 5061 4569 3478 ]}
 
               ${concatMapStrings (port: ''
                 iptables -A PREROUTING -t mangle -i br-${name} -p tcp --dport ${toString port} -j MARK --set-mark 5
-              '') [ 80 443 143 993 110 587 5222 5269 53 655 1149 123 4500 1293 500 5060 5061 4569 3478 ]}
+              '') [ 80 443 143 993 110 587 5222 5269 53 123 4500 1293 500 5060 5061 4569 3478 ]}
 
               ${concatStrings (mapAttrsToList (name: fcfg: ''
                 ip46tables -I nixos-fw 3 -i ${cfg.externalInterface} -p udp --dport ${toString fcfg.listenPort} -j nixos-fw-accept
