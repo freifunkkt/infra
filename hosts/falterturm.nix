@@ -31,9 +31,10 @@ in
     externalInterface = "enp0s3";
     ip4Interfaces = [ "tun0" "enp0s3" ];
     ip6Interface = "heipv6";
+    
+    #ist das die normale Konfiguration der Schnittstelle
     networkingLocalCommands = ''
       ip rule add from 188.68.56.228/32 lookup 5
-      #ist das die normale Konfiguration der Schnittstelle?
       ip route replace default via 188.68.56.3 table 5
     '';
     graphite = secrets.stats.bpletza;
