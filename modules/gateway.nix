@@ -168,7 +168,8 @@ in
 
     boot =
       { extraModulePackages = with config.boot.kernelPackages;
-          [ batman_adv netatop ];
+          #removed netatop in next line; currently broken in nixos unstable
+          [ batman_adv ];
         kernelModules = [ "batman_adv" ];
         tmpOnTmpfs = true;
         kernel.sysctl =
