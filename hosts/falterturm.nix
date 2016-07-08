@@ -249,5 +249,5 @@ in
   services.openvpn.servers = secrets.openvpn;
 
   users.extraUsers.root.password = secrets.rootPassword;
-}
+};
 
