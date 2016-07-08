@@ -40,7 +40,6 @@ in
     graphite = secrets.stats.bpletza;
     segments = {
       ffkt = {
-        #hat mir noch keiner Erklärt, was das bedeutet
         baseMacAddress = "80:00:03:23:42";
         bridgeInterface = {
           ip4 = [ { address = "10.68.0.1"; prefixLength = 18; } ];
@@ -189,7 +188,7 @@ in
     #  ip4 = [ { address = "195.30.94.49"; prefixLength = 28; } ];
     # nur Ipv6 
     ip6 = [ { address = "2001:470:5035::1"; prefixLength = 64; } ];
-    #};
+    };
     defaultGateway = "188.68.56.3";
     defaultGateway6 = "2001:608:a01::ffff";
     #verstehe ich zum großteil im Kontext nicht.
