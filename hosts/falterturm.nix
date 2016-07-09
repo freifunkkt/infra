@@ -72,22 +72,23 @@ in
             listenPort = 10001;
             mtu = 1280;
           };
-          mesh2 = {
-            inherit secret listenAddresses;
-            listenPort = 10002;
-            mtu = 1280;
-          };
-          mesh3 = {
-            inherit secret listenAddresses;
-            listenPort = 10003;
-            mtu = 1280;
-          };
+          #maybe more later
+          #mesh2 = {
+          #  inherit secret listenAddresses;
+          #  listenPort = 10002;
+          #  mtu = 1280;
+          #};
+          #mesh3 = {
+          #  inherit secret listenAddresses;
+          #  listenPort = 10003;
+          #  mtu = 1280;
+          #};
         };
         portBalancings = [
           { from = 10000; to = 10001; }
-          { from = 10001; to = 10002; }
-          { from = 10002; to = 10003; }
-          { from = 10003; to = 10000; }
+         # { from = 10001; to = 10002; }
+         # { from = 10002; to = 10003; }
+         # { from = 10003; to = 10000; }
         ];
       };
       #weiteres Segment...
