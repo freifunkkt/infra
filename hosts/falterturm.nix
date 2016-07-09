@@ -40,7 +40,7 @@ in
     graphite = secrets.stats.bpletza;
     segments = {
       ffkt = {
-        baseMacAddress = "80:00:03:23:42";
+        baseMacAddress = "80:00:01:23:42";
         bridgeInterface = {
           ip4 = [ { address = "10.68.0.1"; prefixLength = 18; } ];
           ip6 = [
@@ -53,7 +53,8 @@ in
         ra.rdnss = [ "2001:470:5035::1" ];
         fastdConfigs = let
           secret = secrets.fastd.gw01.secret;
-          listenAddresses = [ "188.68.56.228" "[2001:470:5035::1]" ];
+          #falterturm has no ipv6. Otherwise add external ipv6 in next line like "[2001:470:5035::1]"
+          listenAddresses = [ "188.68.56.228" ];
         in {
           backbone = {
             inherit secret listenAddresses;
