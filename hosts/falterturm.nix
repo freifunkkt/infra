@@ -56,11 +56,12 @@ in
           #falterturm has no ipv6. Otherwise add external ipv6 in next line like "[2001:470:5035::1]"
           listenAddresses = [ "188.68.56.228" ];
         in {
-          backbone = {
-            inherit secret listenAddresses;
-            listenPort = 9999;
-            mtu = 1426;
-          };
+          #preparation for inter-gateway-fastd-peering
+          #backbone = {
+          #  inherit secret listenAddresses;
+          #  listenPort = 9999;
+          #  mtu = 1426;
+          #};
           mesh0 = {
             inherit secret listenAddresses;
             listenPort = 10000;
