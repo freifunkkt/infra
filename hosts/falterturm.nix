@@ -37,7 +37,8 @@ in
       ip rule add from 188.68.56.228/32 lookup 5
       ip route replace default via 188.68.56.3 table 5
     '';
-    graphite = secrets.stats.bpletza;
+    #uncommented, no stats needed now.
+    #graphite = secrets.stats.bpletza;
     segments = {
       ffkt = {
         baseMacAddress = "80:00:01:23:42";
