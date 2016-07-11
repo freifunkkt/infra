@@ -38,7 +38,7 @@ in
       ip route replace default via 188.68.56.3 table 5
     '';
     
-    graphite = secrets.stats.bpletza;
+    graphite = secrets.stats.servername;
     segments = {
       ffkt = {
         baseMacAddress = "80:00:01:23:42";
