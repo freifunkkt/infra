@@ -196,17 +196,17 @@ in
     defaultGateway = "188.68.56.3";
     defaultGateway6 = "2001:608:a01::ffff";
     #verstehe ich zum großteil im Kontext nicht.
-    #firewall.extraCommands = ''
-    #  ip46tables -I nixos-fw 3 -i eno2 -p tcp --dport 655 -j nixos-fw-accept
-    #  ip46tables -I nixos-fw 3 -i eno2 -p udp --dport 655 -j nixos-fw-accept
-    #  ip46tables -I FORWARD 1 -i eno1 -o br-ffmuc -j ACCEPT
-    #  ip46tables -I FORWARD 1 -i br-ffmuc -o eno1 -j ACCEPT
-    #  ip6tables -I nixos-fw 3 -i tinc.backbone -m pkttype --pkt-type multicast -j nixos-fw-accept
-    #  ip46tables -I FORWARD 1 -i eno1 -o tinc.backbone -j ACCEPT
-    #  ip46tables -I FORWARD 1 -i tinc.backbone -o eno1 -j ACCEPT
-    #  ip46tables -I FORWARD 1 -i br0 -o tinc.backbone -j ACCEPT
-    #  ip46tables -I FORWARD 1 -i tinc.backbone -o br0 -j ACCEPT
-    #'';
+    firewall.extraCommands = ''
+      ip46tables -I nixos-fw 3 -i enp0s3 -p tcp --dport 655 -j nixos-fw-accept
+      ip46tables -I nixos-fw 3 -i enp0s3 -p udp --dport 655 -j nixos-fw-accept
+      ip46tables -I FORWARD 1 -i tun0 -o br-ffkt -j ACCEPT
+      ip46tables -I FORWARD 1 -i br-ffkt -o tun0 -j ACCEPT
+      ip6tables -I nixos-fw 3 -i tinc.backbone -m pkttype --pkt-type multicast -j nixos-fw-accept
+      ip46tables -I FORWARD 1 -i enp0s3 -o tinc.backbone -j ACCEPT
+      ip46tables -I FORWARD 1 -i tinc.backbone -o enp0s3 -j ACCEPT
+      ip46tables -I FORWARD 1 -i br0 -o tinc.backbone -j ACCEPT
+      ip46tables -I FORWARD 1 -i tinc.backbone -o br0 -j ACCEPT
+    '';
   };
   
   #babel und tinc haben wir noch nicht aktiv
