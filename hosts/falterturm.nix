@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   secrets = (import ../secrets);
@@ -8,17 +8,37 @@ in
   imports = [
     ../modules/default.nix
     ../modules/gateway.nix
+    <nixpkgs/nixos/modules/profiles/qemu-guest.nix>
   ];
-
+  
   hardware.enableAllFirmware = true;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "uhci_hcd" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
+  boot.initrd.availableKernelModules = [  "ata_piix" "virtio_pci" "virtio_blk" "xhci_pci" "ehci_pci" "ahci" "uhci_hcd" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";
+    { device = "/dev/disk/by-uuid/aad7553d-c006-4f93-bca1-e5ef2c12404c";
       fsType = "ext4";
     };
+
+  swapDevices =
+    [ { device = "/dev/disk/by-uuid/d015e204-43f6-4b51-a2b8-195933dabeda"; }
+    ];
+  
+  nix = {
+    binaryCachePublicKeys = [ "hydra.mayflower.de:9knPU2SJ2xyI0KTJjtUKOGUVdR2/3cOB4VNDQThcfaY= " ];
+    binaryCaches = [ "https://hydra.mayflower.de/" ];
+  };
+  
+  environment.systemPackages = with pkgs; [
+    wget
+    vim
+    git
+    traceroute
+    htop
+    atop
+    tcpdump
+  ];
 
   nix.maxJobs = 4;
 
