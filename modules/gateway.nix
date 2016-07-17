@@ -68,9 +68,21 @@ in
       ip6Interface = mkOption {
         type = types.str;
         description = "Interface to route IPv6 to";
-        example = "eth1";
+        example = "heipv6";
       };
-
+      
+      ip6Tunnel = mkOption {
+        type = types.str;
+        description = "Tunnel for IPv6 to be send to...";
+        example = "
+          ifconfig sit0 up
+          ifconfig sit0 inet6 tunnel ::b.c.d.e
+          ifconfig sit1 up
+          ifconfig sit1 inet6 add x:y:z:a::2/64
+          route -A inet6 add ::/0 dev sit1
+        ";
+      };
+      
       networkingLocalCommands = mkOption {
         type = types.lines;
         description = "Commands to add to networking.localCommands";
@@ -298,6 +310,7 @@ in
         dhcpcd.allowInterfaces = [ ];
         localCommands = ''
           ip route replace unreachable default metric 100 table 42
+          ${cfg.ip6Tunnel}
           ${concatSegments (name: scfg: ''
             ip rule add iif br-${name} lookup 42
             ip rule add iif br-${name} fwmark 5 lookup 5
