@@ -52,11 +52,10 @@ in
     ip4Interfaces = [ "tun0" "enp0s3" ];
     ip6Interface = "heipv6";
     ip6Tunnel = "
-      ifconfig sit0 up
-      ifconfig sit0 inet6 tunnel ::216.66.86.114
-      ifconfig heipv6 up
-      ifconfig heipv6 inet6 add 2001:470:6c:83::2/64
-      route -A inet6 add ::/0 dev heipv6
+      ip tunnel add he-ipv6 mode sit remote 216.66.86.114 local 188.68.56.228 ttl 255
+      ip link set he-ipv6 up
+      ip addr add 2001:470:6c:83::2/64 dev he-ipv6
+      ip route add ::/0 dev he-ipv6
     ";
     
     #ist das die normale Konfiguration der Schnittstelle
