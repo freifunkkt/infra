@@ -51,6 +51,13 @@ in
     externalInterface = "enp0s3";
     ip4Interfaces = [ "tun0" "enp0s3" ];
     ip6Interface = "heipv6";
+    ip6Tunnel = "
+      ifconfig sit0 up
+      ifconfig sit0 inet6 tunnel ::216.66.86.114
+      ifconfig heipv6 up
+      ifconfig heipv6 inet6 add 2001:470:6c:83::2/64
+      route -A inet6 add ::/0 dev heipv6
+    ";
     
     #ist das die normale Konfiguration der Schnittstelle
     networkingLocalCommands = ''
