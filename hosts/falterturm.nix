@@ -56,18 +56,13 @@ in
       ip tunnel add heipv6 mode sit remote 216.66.86.114 local 188.68.56.228 ttl 255
       ip link set heipv6 up
       ip addr add 2001:470:6c:83::2/64 dev heipv6
-      ip route add ::/0 dev he-ipv6
+      ip route add ::/0 dev heipv6
     '';
     
     #ist das die normale Konfiguration der Schnittstelle
     networkingLocalCommands = ''
       ip rule add from 188.68.56.228/32 lookup 5
       ip route replace default via 188.68.56.3 table 5
-      modprobe ipv6
-      ip tunnel add heipv6 mode sit remote 216.66.86.114 local 188.68.56.228 ttl 255
-      ip link set heipv6 up
-      ip addr add 2001:470:6c:83::2/64 dev heipv6
-      ip route add ::/0 dev he-ipv6
     '';
     
     graphite = secrets.stats.servername;
