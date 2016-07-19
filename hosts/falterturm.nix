@@ -77,7 +77,7 @@ in
           ];
         };
         dhcpRanges = [ "10.68.16.0,10.68.31.254,255.255.224.0,1h" ];
-        ra.prefixes = [ "2001:470:5035::/64", "fdef:ffc0:8fff::/64" ];
+        ra.prefixes = [ "2001:470:5035::/64" "fdef:ffc0:8fff::/64" ];
         ra.rdnss = [ "2001:470:5035::1" ];
         fastdConfigs = let
           secret = secrets.fastd.gw01.secret;
