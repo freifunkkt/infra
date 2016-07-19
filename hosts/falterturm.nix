@@ -77,12 +77,12 @@ in
           ];
         };
         dhcpRanges = [ "10.68.16.0,10.68.31.254,255.255.224.0,1h" ];
-        ra.prefixes = [ "2001:470:5035::/64" ];
+        ra.prefixes = [ "2001:470:5035::/64", "fdef:ffc0:8fff::/64" ];
         ra.rdnss = [ "2001:470:5035::1" ];
         fastdConfigs = let
           secret = secrets.fastd.gw01.secret;
           #falterturm has no ipv6. Otherwise add external ipv6 in next line like "[2001:470:5035::1]"
-          listenAddresses = [ "188.68.56.228" ];
+          listenAddresses = [ "188.68.56.228", "2001:470:5035::1" ];
         in {
           #preparation for inter-gateway-fastd-peering
           #backbone = {
