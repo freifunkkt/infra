@@ -420,7 +420,7 @@ in
               cache-size=0
               no-negcache
               no-resolv
-              server=213.73.91.35
+              server=8.8.8.8
 
               enable-tftp
               tftp-root=/var/lib/tftp
