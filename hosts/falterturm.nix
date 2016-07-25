@@ -73,16 +73,16 @@ in
           ip4 = [ { address = "10.68.0.1"; prefixLength = 18; } ];
           ip6 = [
             { address = "fdef:ffc0:8fff::1"; prefixLength = 64; }
-            { address = "2001:470:5035::1"; prefixLength = 64; }
+            { address = "2001:470:6c:83::2"; prefixLength = 64; }
           ];
         };
         dhcpRanges = [ "10.68.16.0,10.68.31.254,255.255.224.0,1h" ];
-        ra.prefixes = [ "2001:470:5035::/64" "fdef:ffc0:8fff::/64" ];
-        ra.rdnss = [ "2001:470:5035::1" "fdef:ffc0:8fff::1"];
+        ra.prefixes = [ "2001:470:6c:83::/64" "fdef:ffc0:8fff::/64" ];
+        ra.rdnss = [ "2001:470:6c:83::2" "fdef:ffc0:8fff::1"];
         fastdConfigs = let
           secret = secrets.fastd.gw01.secret;
           #falterturm has no ipv6. Otherwise add external ipv6 in next line like "[2001:470:5035::1]"
-          listenAddresses = [ "188.68.56.228"  "[2001:470:5035::1]" ];
+          listenAddresses = [ "188.68.56.228"  "[2001:470:6c:83::2]" ];
         in {
           #preparation for inter-gateway-fastd-peering
           #backbone = {
@@ -218,10 +218,10 @@ in
     interfaces.heipv6 = {
     #  ip4 = [ { address = "195.30.94.49"; prefixLength = 28; } ];
     # nur Ipv6 
-    ip6 = [ { address = "2001:470:5035::1"; prefixLength = 64; } ];
+    ip6 = [ { address = "2001:470:6c:83::2"; prefixLength = 64; } ];
     };
     defaultGateway = "188.68.56.3";
-    defaultGateway6 = "2001:608:a01::ffff";
+    defaultGateway6 = "2001:470:6c:83::1";
     #verstehe ich zum großteil im Kontext nicht.
     firewall.extraCommands = ''
       ip46tables -I nixos-fw 3 -i enp0s3 -p tcp --dport 655 -j nixos-fw-accept
