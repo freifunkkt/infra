@@ -38,6 +38,7 @@ in
     htop
     atop
     tcpdump
+    screen
   ];
 
   nix.maxJobs = 4;
