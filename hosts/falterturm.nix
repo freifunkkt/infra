@@ -225,10 +225,10 @@ in
     defaultGateway6 = "2001:470:6c:83::1";
     #verstehe ich zum großteil im Kontext nicht.
     firewall.extraCommands = ''
-      ip4tables -I nixos-fw 3 -i enp0s3 -p tcp --dport 655 -j nixos-fw-accept
-      ip4tables -I nixos-fw 3 -i enp0s3 -p udp --dport 655 -j nixos-fw-accept
-      ip4tables -I FORWARD 1 -i tun0 -o br-ffkt -j ACCEPT
-      ip4tables -I FORWARD 1 -i br-ffkt -o tun0 -j ACCEPT
+      iptables -I nixos-fw 3 -i enp0s3 -p tcp --dport 655 -j nixos-fw-accept
+      iptables -I nixos-fw 3 -i enp0s3 -p udp --dport 655 -j nixos-fw-accept
+      iptables -I FORWARD 1 -i tun0 -o br-ffkt -j ACCEPT
+      iptables -I FORWARD 1 -i br-ffkt -o tun0 -j ACCEPT
       ip6tables -I FORWARD 1 -i heipv6 -o br-ffkt -j ACCEPT
       ip6tables -I FORWARD 1 -i br-ffkt -o heipv6 -j ACCEPT
       ip6tables -I nixos-fw 3 -i tinc.backbone -m pkttype --pkt-type multicast -j nixos-fw-accept
