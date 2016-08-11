@@ -77,7 +77,7 @@ in
             { address = "2001:470:6c:83::2"; prefixLength = 64; }
           ];
         };
-        dhcpRanges = [ "br-ffkt,10.68.16.0,10.68.31.254,255.255.192.0,1h" ];
+        dhcpRanges = [ "10.68.16.0,10.68.31.254,255.255.192.0,1h" ];
         ra.prefixes = [ "2001:470:6c:83::/64" "fdef:ffc0:8fff::/64" ];
         ra.rdnss = [ "2001:470:6c:83::2" "fdef:ffc0:8fff::1"];
         fastdConfigs = let
