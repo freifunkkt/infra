@@ -409,8 +409,6 @@ in
                 interface=br-${name}
               '')}
               
-              listen-address=10.68.0.1
-              
               dhcp-ignore-names
               dhcp-lease-max=40960
               ${concatSegments (name: scfg: concatMapStrings (range: ''
